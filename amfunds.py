@@ -3,6 +3,7 @@ import pyperclip
 import time
 
 # v1.0 initial release
+# v1.1 added exception handling when next pgae png is not found
 
 print( """
 
@@ -27,7 +28,7 @@ print( """
 ╚██████╗███████╗██║╚██████╗██║  ██╗███████╗██║  ██║             
  ╚═════╝╚══════╝╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝  
  
- v.1.0 by tamas.fabian@dealogic.com
+ v.1.1 by tamas.fabian@dealogic.com
  last updated on:      Mar-06-2019
  initially created on: Mar-06-2019
  
@@ -60,7 +61,10 @@ for _ in range(int(actualpages)):
 	page_data = pyperclip.paste()
 	f.write((str(page_data)) + "\n")
 	actualpages = actualpages - 1
-	x, y = pyautogui.locateCenterOnScreen('amnext.png')
+	try:
+		x, y = pyautogui.locateCenterOnScreen('amnext.png')
+	except:
+		break
 	#pyautogui.click(1448, 592)
 	pyautogui.click(x, y)
 	time.sleep(3)
